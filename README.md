@@ -56,7 +56,39 @@
 
 ### 第2章  Android用户界面的设计
 
+#### 第1节  用户界面组件包Widget和View类
 
+**Widget：提供了丰富多彩的用户界面组件**
+
+|可视化组件|说明|
+|----|----|
+|Button|按钮|
+|CalendarView|日历视图|
+|CheckBox|复选框|
+|Edittext|文本输入框|
+|ImageView|图片|
+|ListView|列表视图|
+|RadioGroup|单选按钮|
+|Spinner|下拉列表|
+|TextView|文本标签|
+|WebView|浏览器视图|
+|Toast|消息提示|
+
+
+**View：用户界面组件共同的父类**
+
+对于View及其子类的属性，可以在在XML配置，也可以在Java代码中动态配置
+
+|属性|对应方法|说明|
+|----|----|----|
+|android:background|setBackgroundColor(int color)|设置背景颜色|
+|android:id|setId(int)|为组件设置Id|
+|android:alpha|setAlpha(int)/findViewById()|透明度/关联Id|
+|android:visibility|setVisibility(int)|设置组件可见性|
+|android:clickable|setClickable(boolean)|是否接受点击事件|
+
+
+#### 第2节  文本标签TextView与按钮Button
 
 
 
