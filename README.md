@@ -92,6 +92,7 @@
 
 #### 第2节  文本标签TextView与按钮Button
 
+见示范代码
 
 #### 第3节 文本编辑框EditText
 
@@ -115,7 +116,7 @@ Android常见的布局方式有LinearLayout，FrameLayout，TableLayout，Relati
 
 #### 第5节 进度条和选项按钮
 
-
+见示范代码
 
 #### 第6节 图像显示类ImageView和画廊组件类Gallery
 
@@ -178,7 +179,7 @@ ListActivity类
 
 #### 第8节 列表组件Slidingdraw
 
-
+见示范代码
 
 
 
