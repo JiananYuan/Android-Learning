@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="抽屉视图" />
+
+    <SlidingDrawer
+        android:id="@+id/drawer"
+        android:orientation="vertical"
+        android:handle="@id/handle"
+        android:content="@id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/handle"
+            android:src="@drawable/up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#66cccc"
+            android:focusable="true" >
+
+        </LinearLayout>
+
+    </SlidingDrawer>
+
+
+</LinearLayout>
+
+
+
+
+package com.example.jiananyuan.learning;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.SlidingDrawer;
+
+public class MainActivity extends Activity {
+    SlidingDrawer drawer;
+    ImageButton btn;
+    ListView list;
+    LinearLayout layout;
+    String[] data = {
+            "葡萄成熟时",
+            "阴天快乐",
+            "好久不见",
+            "苦瓜"
+    };
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        layout = findViewById(R.id.content);
+        btn = findViewById(R.id.handle);
+        drawer = findViewById(R.id.drawer);
+        list = new ListView(this);
+        list.setAdapter(new ArrayAdapter<>(
+                MainActivity.this,
+                android.R.layout.simple_list_item_1,
+                data
+        ));
+        layout.addView(list);
+        list.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data));
+        drawer.setOnDrawerOpenListener(new mOpenListener());
+        drawer.setOnDrawerCloseListener(new mCloseListener());
+        drawer.setOnDrawerScrollListener(new mScrollListener());
+    }
+
+    class mOpenListener implements SlidingDrawer.OnDrawerOpenListener {
+        @Override
+        public void onDrawerOpened() {
+            btn.setImageResource(R.drawable.down);
+        }
+    }
+
+    class mCloseListener implements SlidingDrawer.OnDrawerCloseListener {
+        @Override
+        public void onDrawerClosed() {
+            btn.setImageResource(R.drawable.up);
+        }
+    }
+
+    class mScrollListener implements SlidingDrawer.OnDrawerScrollListener {
+        @Override
+        public void onScrollEnded() {
+
+        }
+
+        @Override
+        public void onScrollStarted() {
+
+        }
+    }
+
+}
+
+/*
+
+    android.R.layout.simple_list_item_1：Android内置的ListView布局方式
+    android.R.layout.simple_list_item_2：一行title，一行text
+    android.R.layout.simple_list_single_choice：单选按钮
+    android.R.layout.simple_list_multiple_choice：多选按钮
+
+ */
