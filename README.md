@@ -142,8 +142,14 @@ ListView类是Android开发中经常用到的组件，该组件必须和适配�
 
 ListView类
 
-
 ListActivity类
+
+当整个Activity中只有一个ListView组件时可以使用ListActivity，默认绑定了一个ListView（可用geiListView获取得到），并提供了一些与ListView相关的操作
+
+
+#### 第8节 列表组件Slidingdraw
+
+
 
 
 
