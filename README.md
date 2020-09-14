@@ -117,6 +117,29 @@ Android常见的布局方式有LinearLayout，FrameLayout，TableLayout，Relati
 
 
 
+#### 第6节 图像显示类ImageView和画廊组件类Gallery
+
+ImageView比较混淆的是scaleType属性值：
+
+|scaleType属性值常量|说明|
+|----|----|
+|matrix|用矩阵来绘图|
+|fitXY|拉伸图片（不按宽高比例）以填充View|
+|fitStart|按比例拉伸图片，使得高度为View的高度，且显示在View左边|
+|fitCenter|按比例拉伸图片，使得高度为View的高度，且显示在View中间|
+|fitEnd|按比例拉伸图片，使得高度为View的高度，且显示在View右边|
+|center|按原图大小显示图片，当宽高大于View宽高时则截取图片中间部分显示|
+|centerCrop|按比例放大原图直至等于某边View的宽高显示|
+|centerInside|当原图宽高等于View的宽高时按原图大小居中显示，否则将原图缩放至View的宽高居中显示|
+
+#### 第7节 消息提示类Toast
+
+消息Toast有默认方式、自定义方式和带图标方式
+
+
+
+
+
 
 
 
