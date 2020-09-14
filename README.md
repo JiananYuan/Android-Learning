@@ -1,6 +1,6 @@
 # Android-learning
 
-## 教程基于《Android Studio 应用程序设计（第2版）》 --张思民著
+## 教程基于《Android Studio 应用程序设计（第2版）》 ——张思民著
 
 ### 第1章  Android系统及其开发过程
 
@@ -135,6 +135,17 @@ ImageView比较混淆的是scaleType属性值：
 #### 第7节 消息提示类Toast
 
 消息Toast有默认方式、自定义方式和带图标方式
+
+#### 第8节 列表组件
+
+ListView类是Android开发中经常用到的组件，该组件必须和适配器配合使用，由适配器提供显示样式和显示数据。
+
+ListView类
+
+
+ListActivity类
+
+
 
 
 
