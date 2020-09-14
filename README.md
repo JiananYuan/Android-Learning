@@ -32,8 +32,6 @@
 
 - Android应用程序开发
 
-#### 第2节 搭建Android Studio开发环境  第3节  Android API和在线帮助文档
-
 可百度
 
 #### 第4节 Android应用程序的开发过程
@@ -92,8 +90,28 @@
 
 按钮是TextView的子类
 
+#### 第2节  文本标签TextView与按钮Button
 
 
+#### 第3节 文本编辑框EditText
+
+继承自TextView
+
+#### 第4节  Android布局管理
+
+Andrid系统的布局管理指的是在XML布局文件中设置组件的大小、间据、排列及对齐方式等。
+Android常见的布局方式有LinearLayout，FrameLayout，TableLayout，RelativeLayout，GridLayout
+
+线性布局是所有布局中最常用的一种布局方式，要么水平线性布局，要么垂直线性布局
+
+帧布局是将组件放置到左上角位置，当添加多个组件时后面的组件将遮盖之前的组件
+
+表格布局是将页面划分成由行、列组成的单元格,列数由shrinkColumns定义，行由TableView标签定义
+
+
+
+
+#### 
 
 
 
