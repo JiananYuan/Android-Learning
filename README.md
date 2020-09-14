@@ -90,6 +90,8 @@
 
 #### 第2节  文本标签TextView与按钮Button
 
+按钮是TextView的子类
+
 
 
 
