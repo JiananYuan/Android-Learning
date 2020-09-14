@@ -149,6 +149,18 @@ ImageSwitcher常用方法
 |showNext|展示下一个视图|
 |showPrevious|展示上一个视图|
 
+程序设计步骤：
+
+- 在布局文件中声明画廊组件Gallery和图片切换器ImageSwitcher，采用表格布局
+
+- 把事先准备好的图片文件复制到项目的drawable中，在Activity创建一个图像文件数组，其数组的元素为图片文件
+
+- 在Activity中创建画廊组件Gallery和图片切换器ImageSwitcher组件的实例对象
+
+- 在Activity中创建一个实现Viewfactory接口的内部类，重写该类的makeView()方法建立ImageView视图。ImageSwitcher通过该图像视图显示放大的图片
+
+- 在Activity中创建一个BaseAdapter适配器子类的内部类，用于安排放在画廊中图片文件及显示方式
+
 #### 第7节 消息提示类Toast
 
 消息Toast有默认方式、自定义方式和带图标方式
