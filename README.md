@@ -108,7 +108,9 @@ Android常见的布局方式有LinearLayout，FrameLayout，TableLayout，Relati
 
 表格布局是将页面划分成由行、列组成的单元格,列数由shrinkColumns定义，行由TableView标签定义
 
+相对布局是采用相对其他组件位置的布局方式。在相对布局中通过指定id关联其他组件与之右对齐、上下对齐或以屏幕中央等方式来排列组件
 
+网格布局是设置区域为若干行和若干列的网格
 
 
 #### 
