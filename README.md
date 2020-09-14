@@ -132,6 +132,23 @@ ImageView比较混淆的是scaleType属性值：
 |centerCrop|按比例放大原图直至等于某边View的宽高显示|
 |centerInside|当原图宽高等于View的宽高时按原图大小居中显示，否则将原图缩放至View的宽高居中显示|
 
+Gallery类常与图片切换器ImageSwitcher配合使用，用图片切换器ImageSwitcher类展示图片效果。使用ImageSwitcher时必须用ViewFactory接口的makeView()方法创建视图。
+
+Gallery类常用的属性方法
+|元素属性|说明|
+|----|----|
+|spacing|设置图片之间的间距，以像素为单位|
+|unselectedAlpha|设置未选中图片的透明度|
+|animationDuration|设置当布局变化时动画转换所需的时间|
+
+
+ImageSwitcher常用方法
+|setInAnimation|绘制的动画对象进屏幕的方式|
+|setOutAnimation|绘制的动画对象离开屏幕的方式|
+|setImageResource|设置显示的初始图片|
+|showNext|展示下一个视图|
+|showPrevious|展示上一个视图|
+
 #### 第7节 消息提示类Toast
 
 消息Toast有默认方式、自定义方式和带图标方式
