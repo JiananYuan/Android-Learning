@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity"
+    android:layout_gravity="center">
+
+    <!--    画廊-->
+    <Gallery
+        android:id="@+id/gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:spacing="10dp"/>
+
+    <ImageSwitcher
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</TableLayout>
+
+
+
+
+
+package com.example.learning;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.Gallery;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
+import android.widget.ViewSwitcher;
+
+public class MainActivity extends AppCompatActivity {
+
+    private ImageSwitcher img;
+    private Gallery gallery;
+    private int[] imgs = {
+            R.drawable.p1,
+            R.drawable.p2,
+            R.drawable.p3,
+            R.drawable.p4,
+            R.drawable.p5,
+            R.drawable.p6,
+            R.drawable.p7,
+            R.drawable.p8,
+            R.drawable.p9,
+            R.drawable.p10
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        gallery = findViewById(R.id.gallery);
+        img = findViewById(R.id.img);
+        img.setFactory(new viewFactory());
+        img.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
+        img.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_out));
+        img.setImageResource(R.drawable.p1);
+        gallery.setOnItemSelectedListener(new onItemSelectedListener());
+        gallery.setSpacing(10);
+        gallery.setAdapter(new baseAdapter());
+    }
+
+    class viewFactory implements ViewSwitcher.ViewFactory {
+        @Override
+        public View makeView() {
+            ImageView imageview = new ImageView(MainActivity.this);
+            imageview.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            return imageview;
+        }
+    }
+
+    class onItemSelectedListener implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            img.setImageResource((int) gallery.getItemIdAtPosition(position));
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+
+        }
+    }
+
+    class baseAdapter extends BaseAdapter {
+        public int getCount() {
+            return imgs.length;
+        }
+        public Object getItem(int position) {
+            return null;
+        }
+        public long getItemId(int position) {
+            return imgs[position];
+        }
+        @Override
+        public View getView(int position, View contentView, ViewGroup parent) {
+            ImageView imageView = new ImageView(MainActivity.this);
+            imageView.setImageResource(imgs[position]);
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageView.setLayoutParams(new Gallery.LayoutParams(60, 60));
+            return imageView;
+        }
+
+    }
+
+}
