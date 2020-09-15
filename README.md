@@ -200,7 +200,28 @@ Intent属性有：
 |ACTION_CALL_BUTTON|按下拨号键|
 |ACTION_CALL|呼叫电话号码|
 
-详见示范代码
+Activity页面之间的切换，一般有如下流程：
+
+（1）创建一个Intent对象
+
+（2）调用Activity的startActivity(intent)方法
+
+我们还希望能够在不同的Activity之间传递数据，这个时候需要用到Bundle类
+
+Buddle类是用于为字符串与某组件对象建立映射关系的组件，一般来说，有如下流程：
+
+（1）在原Activity新建Intent对象和Buddle对象
+
+（2）其中Intent和上面一样，而Buddle对象则可参照以下写法：`bundle.putString("text",txt.getText().toString())`
+
+（3）把Buddle对象床传给Intent对象：`intent.putExtras(bundle)`
+
+（4）另外一个Activity，调用：
+
+```
+bundle = this.getIntent().getExtras();
+String str = bundle.getString("text");
+```
 
 
 #### 第2节  菜单设计
