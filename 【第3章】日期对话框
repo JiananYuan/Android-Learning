@@ -1,0 +1,43 @@
+package com.example.learning;
+
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.DatePickerDialog;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Button btn;
+    int y = 2020;
+    int m = 8;
+    int d = 16;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        btn = findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog.OnDateSetListener dateLis = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                              y = year;
+                              m = month;
+                              d = dayOfMonth;
+                    }
+                };
+
+                DatePickerDialog date = new DatePickerDialog(MainActivity.this, dateLis, y, m, d);
+                date.setTitle("日期对话框");
+                date.show();
+            }
+        });
+    }
+
+}
