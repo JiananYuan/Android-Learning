@@ -1,0 +1,39 @@
+package com.example.learning;
+
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.app.TimePickerDialog;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TimePicker;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Button btn;
+    int h = 8;
+    int m = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        btn = findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        h = hourOfDay;
+                        m = minute;
+                    }
+                };
+                TimePickerDialog d = new TimePickerDialog(MainActivity.this, t,h,m,true);
+                d.setTitle("时间对话框");
+                d.show();
+            }
+        });
+    }
+
+}
