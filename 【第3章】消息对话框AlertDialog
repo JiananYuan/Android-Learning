@@ -1,0 +1,141 @@
+MainActivity.xml
+_______________________________________________________________
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="普通对话框" />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="输入对话框" />
+
+</LinearLayout>
+
+
+
+
+
+login.xml
+_______________________________________________________________
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户名" />
+
+    <EditText
+        android:id="@+id/account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txt_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="口令" />
+
+    <EditText
+        android:id="@+id/passwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+
+
+
+
+
+MainActivity.java
+_______________________________________________________________
+package com.example.learning;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    
+    Button btn1, btn2;
+    LinearLayout login;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        btn1 = findViewById(R.id.btn1);  // 普通对话框
+        btn2 = findViewById(R.id.btn2);  // 输入对话框
+        btn1.setOnClickListener(new mClick());
+        btn2.setOnClickListener(new mClick());
+    }
+
+    class mClick implements View.OnClickListener {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+
+        @Override
+        public void onClick(View v) {
+                if (v == btn1) {
+                    dialog.setTitle("Warning");
+                    // dialog.setIcon();
+                    dialog.setMessage("这有可能丢失信息!");
+                    dialog.setPositiveButton("Confirm", new okClick());
+                } else {
+                    login = (LinearLayout) getLayoutInflater().inflate(R.layout.login, null);
+                    dialog.setTitle("Tencent QQ").setMessage("input info").setView(login);
+                    dialog.setPositiveButton("Confirm", new loginClick());
+                    dialog.setNegativeButton("Exit",new exitClick());
+                }
+                dialog.create();
+                dialog.show();
+        }
+
+        class okClick implements DialogInterface.OnClickListener {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }
+
+        class loginClick implements DialogInterface.OnClickListener {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(MainActivity.this, "成功", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        }
+
+        class exitClick implements DialogInterface.OnClickListener {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                MainActivity.this.finish();
+            }
+        }
+    }
+
+
+}
+
+
