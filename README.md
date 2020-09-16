@@ -226,6 +226,29 @@ String str = bundle.getString("text");
 
 #### 第2节  菜单设计
 
+Android的菜单可以分为三类：Option Menu（选项菜单），Context Menu（上下文菜单），Sub Menu
+
+|方法|说明|
+|----|----|
+|onCreateOptionMenu|初始化菜单|
+|onPrepareOptionsMenu|显示之前调用|
+|onOptionsMenuClosed|菜单关闭时调用|
+|onOptionsItemSelected|监听方法|
+
+创建选项菜单的步骤：
+
+（1）重写Activity的onCreateOptionMenu方法，当菜单第1次被打开时调用
+
+（2）调用Menu的add方法添加菜单项（MenuItem）
+
+（3）重写Activity的onOptionsItemSelected方法，响应点击事件
+
+见样例
+
+上下文菜单：
+
+任何视图都可以注册上下文菜单，见样例
+
 
 #### 第3节  对话框
 
