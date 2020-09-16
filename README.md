@@ -218,7 +218,7 @@ Buddle类是用于为字符串与某组件对象建立映射关系的组件，�
 
 （4）另外一个Activity，调用：
 
-```
+```java
 bundle = this.getIntent().getExtras();
 String str = bundle.getString("text");
 ```
@@ -252,8 +252,45 @@ Android的菜单可以分为三类：Option Menu（选项菜单），Context Men
 
 #### 第3节  对话框
 
+Android提供了4种常用的对话框：
 
-#### 第4节  页面的切换和传递参数值
+- AlertDialog：消息对话框
+
+- ProgressDialog：进度条对话框
+
+- DatePickerDialog：日期选择对话框
+
+- TimePickerDialog：时间选择对话框
+
+AlertDialog：
+
+|方法|说明|
+|----|----|
+|AlertDialog.Builder|构造方法|
+|create|创建AlertDialog对象|
+|setTitle|设置标题|
+|setIcon|设置图标|
+|setMessage|设置提示信息|
+|setItems|设置对话框要显示的一个list|
+|setPositiveButton|添加yes按钮|
+|setNegativeButton|添加no按钮|
+|show|显示对话框|
+|dismiss|关闭对话框|
+
+创建流程：
+
+```java
+Builder dialog = new AlertDialog().Builder(Context);
+
+dialog.setTitle();
+dialog.setIcon();
+dialog.setMessage();
+dialog.setPositiveButton();
+
+dialog.create();
+dialog.show();
+```
+
 
 
 ### 第4章  图形与多媒体设计
