@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             if (v == btn1) {
                 MainActivity.this.startService(intent);
             } else {
-                MainActivity.this.startService(intent);
+                MainActivity.this.stopService(intent);
             }
         }
     }
