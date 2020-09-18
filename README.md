@@ -359,6 +359,36 @@ sendBroadcast(intent);
 
 #### 第1节  Web视图
 
+WebView类：
+
+|方法|说明|
+|----|----|
+|loadUrl|加载网页页面|
+|loadData|加载HTML格式的Web视图|
+|reload|重新加载|
+|getSettings|获取WebSettings对象|
+|goBack|返回|
+|goForward|前进|
+|clearHistory|清空历史|
+
+
+使用流程：
+
+（1）设置WebView的基本信息：
+
+- 若访问的页面含有js，则`webview.getSettings().setJavaScriptEnabled(true)`
+- 触摸焦点起作用：`requestFocus`
+- 取消滚动条：`this.setScrollBarStyle(SCROLLBARS_OUTSIDE_OVERLAY)`
+
+（2）设置WebView要显示的网页：
+```java
+webView.loadUrl("http....."); // 互联网
+webView.loadUrl("ftp....."); // 本地文件
+```
+
+（3）添加网络权限
+
+
 
 
 
