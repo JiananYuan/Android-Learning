@@ -296,6 +296,39 @@ dialog.show();
 ### 第4章  图形与多媒体设计
 
 
+### 第5章  后台服务与系统服务
+
+#### 第1节  后台服务Service
+
+Service服务的常用方法
+
+|方法|说明|
+|----|----|
+|onCreate|创建后台服务|
+|onStartCommand|启动一个后台服务|
+|onDestroy|销毁后台服务，并删除所有调用|
+|sendBroadcast|发送广播|
+|onBind|与服务通信信道进行绑定|
+|onUnbind|撤销与通信信道的绑定|
+
+设计一个后台服务的应用程序大致有以下几个步骤：
+
+（1）创建Service的子类：
+- 编写onCreate()方法，创建后台服务
+- 编写onStartCommand()方法，启动后台服务
+- 编写onDestory()方法，终止后台服务，并删除所有调用
+
+（2）创建启动和控制Service的Activity：
+- 创建Intent对象，建立Activity与Service的关联
+- 调用Activity的startService方法启动Service后台服务
+- 调用Activity的stopService方法关闭后台服务
+
+（3）修改AndroidManifest.xml
+
+
+
+
+
 
 
 
