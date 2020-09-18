@@ -1,0 +1,129 @@
+Manifest.xml：
+________________________________________________________
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.learning">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon1"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon1"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>
+
+
+
+MainActivity.java：
+________________________________________________________
+package com.example.learning;
+
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+
+    WebView web;
+    EditText url;
+    Button btn;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (web.canGoBack() && keyCode == KeyEvent.KEYCODE_BACK) {
+            web.goBack();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        web = findViewById(R.id.web);
+        url = findViewById(R.id.url);
+        btn = findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String addr = "https://" + url.getText().toString();
+                web.loadUrl(addr);
+            }
+        });
+
+        web.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            {
+                //  重写此方法，不跳到浏览器
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
+
+    }
+
+}
+
+
+
+XML：
+________________________________________________________
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/url"
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                        android:text="Open" />
+
+        </LinearLayout>
+
+        <WebView
+            android:id="@+id/web"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+</LinearLayout>
+
+
+
+
+
