@@ -326,7 +326,27 @@ Service服务的常用方法
 （3）修改AndroidManifest.xml
 
 
+#### 第2节  信息广播机制Broadcast
 
+（1）创建Intent对象，设置Intent对象的action属性。这个action属性是接收广播数据的标识，只有注册了相同action属性的广播接收器才能收到发送的广播数据。
+
+```java
+Intent intent = new Intent();
+intent.setAction("abc");
+```
+
+（2）编写需要广播的信息内容：
+
+```java
+intent.putExtra("hello", ""This is the first method");
+sendBroadcast(intent);
+```
+
+（3）编写一个继承BroadcastReceiver的子类作为广播接收器，该对象是接收广播信息并对信息进行处理的组件，重写onReceive方法
+
+（4）在配置文件中注册广播接受类
+
+（5）销毁广播接收器
 
 
 
