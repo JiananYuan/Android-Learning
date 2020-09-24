@@ -1,0 +1,117 @@
+------------------------------服务器端代码------------------------------
+
+
+
+
+
+------------------------------connSocket.java------------------------------
+
+package com.example.learning;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+import java.util.concurrent.Callable;
+
+public class connSocket implements Callable<String> {
+    static DataInputStream in;
+    static DataOutputStream out;
+    static Socket ss;
+    private String ip = "192.168.137.1";
+    private String runLog = "Error!";
+
+    public String call() throws Exception {
+        try {
+            ss = new Socket();
+            SocketAddress addr = new InetSocketAddress(ip,8888);
+            ss.connect(addr, 5000); // 5000是超时时间
+            in = new DataInputStream(ss.getInputStream());
+            out = new DataOutputStream(ss.getOutputStream());
+            out.writeUTF("从客户端发来的消息"); // 模拟两次发送信息，第一次为尝试连接，第二次为正式通信
+            runLog = in.readUTF();
+            Thread.sleep(500);
+            out.writeUTF("客户端已经接收到服务器发送过来的信息");
+            runLog = in.readUTF();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return runLog;
+    }
+
+    public static void disConnect() {
+        if (in != null) {
+            try {
+                in.close();
+            } catch (Exception e) {}
+        }
+        if (out != null) {
+            try {
+                out.close();
+            } catch (Exception e) {}
+        }
+        if (ss != null) {
+            try {
+                ss.close();
+            } catch (Exception e) {}
+        }
+    }
+
+}
+
+
+
+
+------------------------------MainActivity.java------------------------------
+
+package com.example.learning;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import java.util.concurrent.FutureTask;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Button btn;
+    private TextView txt;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        btn = findViewById(R.id.btn);
+        txt = findViewById(R.id.txt);
+        btn.setOnClickListener(new mClick());
+    }
+
+    class mClick implements View.OnClickListener {
+        String str;
+
+        @Override
+        public void onClick(View view) {
+            if (view == btn) {
+                connSocket conn = new connSocket();
+                try {
+                    FutureTask<String> msg = new FutureTask<>(conn);
+                    new Thread(msg).start();
+                    str = msg.get();
+                    txt.append(str);
+                } catch (Exception e) {
+                    txt.setText("连接出错！");
+                    e.printStackTrace();
+                }
+                finally {
+                    conn.disConnect();
+                }
+            }
+        }
+    }
+}
+
+
+
+
