@@ -408,6 +408,105 @@ Callable接口和Runnable接口的区别在于：
 见样例
 
 
+### 第9章  地图服务与传感器检测技术
+
+#### 第1节  电子地图服务与应用程序开发
+
+地图服务：采用高德开发者，见样例
+
+#### 第2节  传感器检测技术
+
+Android内部内置了很多类型的传感器，封装在Sensor类中，常见的传感器类型有：
+
+|类型常量|说明|
+|----|----|
+|Sensor.TYPE_ACCELEROMETER|加速度传感器|
+|Sensor.TYPE_LIGHT|光传感器|
+|Sensor.TYPE_MAGNETIC_FIELD|磁场传感器|
+|Sensor.TYPE_PROXIMITY|距离传感器|
+|Sensor.TYPE_AMBIENT_TEMPERATURE|温度传感器|
+|Sensor.TYPE_PRESSURE|压力传感器|
+|Sensor.TYPE_ALL|所有类型传感器|
+
+传感器管理类SensorManager：
+
+Android中所有传感器都需要通过传感器管理类来访问，通过静态方法可以创建管理类对象。
+|方法|说明|
+|----|----|
+|getSensorList|获取传感器类型列表|
+|registerListener|注册传感器监听器|
+|unregisterListener|注销传感器监听器|
+|goDefaultSensor|获取默认传感器|
+
+```java
+// 枚举传感器类型
+
+package com.example.myamap;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
+
+    private SensorManager manager;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        manager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
+        List<Sensor> list = manager.getSensorList(Sensor.TYPE_ALL);
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        TextView txt;
+        for (Sensor s : list) {
+            txt = new TextView(this);
+            txt.setText(s.getName());
+            layout.addView(txt, new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+        }
+        setContentView(layout);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
