@@ -389,6 +389,28 @@ webView.loadUrl("ftp....."); // 本地文件
 （3）添加网络权限
 
 
+#### 第2节  TCP网络通信程序设计
+
+见样例
+
+**应用Callable接口实现多线程Socket编程**
+
+Callable接口和Runnable接口的区别在于：
+
+- Callable接口中定义的方法是call，Runnable接口中定义的方法是run
+
+- call方法可以抛出异常，run方法不能抛出异常
+
+- Callable接口执行完任务之后可以有返回值，Runnable接口执行完任务之后没有返回值
+
+- 运行Callable接口任务可以返回一个Future对象，该对象是异步计算的结果。用户通过Future对象可以了解任务的执行情况，既可以取消任务的执行，还可以获取任务的执行结果
+
+见样例
+
+
+
+
+
 
 
 
