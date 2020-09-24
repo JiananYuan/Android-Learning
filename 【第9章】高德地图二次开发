@@ -1,0 +1,78 @@
+AndroidManifest.xml：
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.myamap">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="com.amap.api.v2.apikey"
+                android:value="b7e194c9a021412686770556068aac6b" />
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+</manifest>
+
+
+
+activity_main.xml：
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
+
+
+MainActivity.java：
+
+package com.example.myamap;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.MapView;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        MapView mapView = findViewById(R.id.map);
+        mapView.onCreate(savedInstanceState);
+        AMap aMap = mapView.getMap();
+        aMap.setMapType(AMap.MAP_TYPE_NORMAL);
+    }
+}
+
+
+// 配置教程：https://mp.weixin.qq.com/s?__biz=MzIwNzc0NDQyMA==&mid=2247485351&idx=1&sn=f839868eb67b202aa599d2da534a4370&chksm=970cfb6ca07b727a1af88dd47e1bf7105dc74433784abd56228e877845ab7b7f043c61bd9e7c&token=1185329073&lang=zh_CN#rd
+
