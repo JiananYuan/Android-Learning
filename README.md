@@ -296,6 +296,77 @@ dialog.show();
 ### 第4章  图形与多媒体设计
 
 
+#### 第5节  录音与拍照
+
+MediaRecorder类可以录制音频和视频：
+
+|方法|说明|
+|----|----|
+|MediaRecorder|构造函数|
+|setAudioSource|设置音频源|
+|setAudioEncoder|设置音频编码格式|
+|setVideoSource|设置视频源|
+|setVideoEncoder|设置视频编码格式|
+|setVideoFrameRate|设置视频帧速率|
+|setVideoSize|设置视频录制画面大小|
+|setOutputFormat|设置输出格式|
+|setOutputFile|设置输出路径|
+|prepare|准备录制|
+|start|开始录制|
+|stop|停止录制|
+|restart|重置|
+|release|释放资源|
+
+录音流程：
+
+（1）创建录音对象：MediaRecorder r = new MediaRecorder()
+
+（2）设置音频源：r.setAudioSource(MediaRecorder.AudioSouce.MIC)
+
+（3）设置输出格式：r.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+
+（4）设置编码格式：r.setAudioEncoder(MediaRecorder.AudioEncoder.AMB_NB)
+
+（5）设置文件输出路径：r.setOutputFile(path)
+
+（6）准备录制：r.prepare()
+
+（7）开始录制：r.start()
+
+（8）停止录制：r.stop()  r.reset()
+
+（9）释放资源：r.release()
+
+使用Camera类可以获取当前设备中的照相机服务接口：
+
+|方法|说明|
+|----|----|
+|open|创建一个照相机对象|
+|getParameters|Camera.Parameters对象|
+|setParameters|设置照相机参数|
+|setPreviewDisplay|设置取景预览|
+|startPreview|启动照片取景预览|
+|stopPreview|停止照片取景预览|
+|release|释放资源|
+|takePicture|拍照|
+
+使用照片服务的流程：
+
+（1）创建照相机对象：通过Camera类的open方法创建一个照相机对象：Camera c = Camera.open()
+
+（2）设置参数：创建设置照相机参数的Parameters对象，并设置相关参数
+
+（3）预览照片
+
+（4）拍照
+
+（5）停止拍照
+
+见样例
+
+
+
+
 ### 第5章  后台服务与系统服务
 
 #### 第1节  后台服务Service
