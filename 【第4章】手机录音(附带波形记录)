@@ -1,0 +1,171 @@
+MainActicity.java：
+
+package com.example.jiananyuan.task1;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.media.MediaRecorder;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.SystemClock;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Chronometer;
+import android.widget.Toast;
+import com.chibde.visualizer.LineVisualizer;
+import java.io.File;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private Button record; // 开始录音
+    private Button stop; // 停止录音
+    private Button play; // 开始播放
+    private MediaRecorder mediaRecorder; // 内置录音对象
+    private File recordFile; // 记录的文件
+    private RecordPlayer recordPlayer; // 播放器
+    private LineVisualizer lineVisualizer; // 可视化组件
+    private Chronometer timer;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        checkPermission();
+        recordFile = new File(getExternalCacheDir() + "test.amr"); // 外部存储
+        record = findViewById(R.id.record);
+        stop = findViewById(R.id.stop);
+        play = findViewById(R.id.play);
+        lineVisualizer = findViewById(R.id.visualizer);
+        timer = findViewById(R.id.timer);
+
+        record.setOnClickListener(this);
+        stop.setOnClickListener(this);
+        play.setOnClickListener(this);
+
+        // set custom color to the line.
+        lineVisualizer.setColor(ContextCompat.getColor(MainActivity.this, R.color.colorBlue));
+
+        // set the line with for the visualizer between 1-10 default 1.
+        lineVisualizer.setStrokeWidth(1);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        recordPlayer = new RecordPlayer(MainActivity.this);
+        int id = v.getId();
+        switch(id) {
+            case R.id.record:
+                startRecording();
+                break;
+            case R.id.stop:
+                stopRecording();
+                break;
+            case R.id.play:
+                playRecording();
+                break;
+        }
+    }
+
+    private void startRecording() {
+        mediaRecorder = new MediaRecorder();
+        if (recordFile.exists()) {
+            recordFile.delete();
+        }
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+        mediaRecorder.setOutputFile(recordFile.getAbsolutePath());
+        Toast.makeText(this, "开始录音了哦", Toast.LENGTH_SHORT).show();
+        timer.setBase(SystemClock.elapsedRealtime());//计时器清零
+        timer.start();
+        try {
+            mediaRecorder.prepare();
+            mediaRecorder.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void stopRecording() {
+        if (mediaRecorder != null) {
+            mediaRecorder.stop();
+            mediaRecorder.release();
+            mediaRecorder = null;
+            Toast.makeText(this, "录音结束", Toast.LENGTH_SHORT).show();
+            timer.stop();
+        } else {
+            Toast.makeText(this, "还没开始录音呢~", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void playRecording() {
+        if (recordFile.exists()) {
+            Toast.makeText(this, "开始播放", Toast.LENGTH_SHORT).show();
+            recordPlayer.playRecordFile(recordFile,timer);
+            // Set you media player to the visualizer.
+            lineVisualizer.setPlayer(RecordPlayer.mediaPlayer.getAudioSessionId());
+        } else {
+            Toast.makeText(this, "还没有录音文件呢~", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO}; // 选择你需要申请的权限
+            for (int i = 0; i < permissions.length; i++) {
+                int state = ContextCompat.checkSelfPermission(this, permissions[i]);
+                if (state != PackageManager.PERMISSION_GRANTED) { // 判断权限的状态
+                    ActivityCompat.requestPermissions(this, permissions, 200); // 申请权限
+                    return;
+                }
+            }
+        }
+    }
+}
+
+
+
+RecorderPlayer.java：
+
+package com.example.jiananyuan.task1;
+
+import android.content.Context;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.SystemClock;
+import android.widget.Chronometer;
+import android.widget.Toast;
+import java.io.File;
+
+public class RecordPlayer {
+    public static MediaPlayer mediaPlayer;
+    private Context context;
+
+    public RecordPlayer(Context context) {
+        this.context = context;
+    }
+
+    public void playRecordFile(File file, Chronometer timer) {
+        if (file.exists() && file != null) {
+            Uri uri = Uri.fromFile(file);
+            mediaPlayer = MediaPlayer.create(context,uri);
+        }
+        timer.setBase(SystemClock.elapsedRealtime());//计时器清零
+        timer.start();
+        mediaPlayer.start();
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Toast.makeText(context, "播放完毕", Toast.LENGTH_SHORT).show();
+                timer.stop();
+            }
+        });
+    }
+
+    // 暂停和停止就暂时不实现了，因为这个项目核心不在此，要实现也不难
+}
