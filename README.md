@@ -478,6 +478,37 @@ Callable接口和Runnable接口的区别在于：
 
 见样例
 
+### 第8章  数据存储技术
+
+#### 第1节  SQLite数据库
+
+类似于JDBC数据库技术
+
+#### 第2节  文件处理（Java回顾）
+
+1、文件与目录管理——File类
+
+API说明：
+
+|方法|说明|
+|----|----|
+|exists|判断文件或者目录是否存在|
+|isFile|判断对象是否为文件|
+|isDirectory|判断对象是否为目录|
+|getName|返回文件名、目录名|
+|getPath|返回路径|
+|length|返回文件的大小|
+|renameTo|重命名|
+|delete|删除|
+|mkdir|创建当前目录下的子目录|
+
+2、文件流
+
+- FileOutputStream：字节文件输出流
+- FileInputStream：字节文件输入流
+- FileReader：字符文件输入流
+- FileWriter：字符文件输出流
+
 
 ### 第9章  地图服务与传感器检测技术
 
