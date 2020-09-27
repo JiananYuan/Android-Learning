@@ -480,7 +480,7 @@ Callable接口和Runnable接口的区别在于：
 
 ### 第8章  数据存储技术
 
-#### 第1节  SQLite数据库
+#### 第1节  SQLite本地数据库
 
 类似于JDBC数据库技术
 
@@ -508,6 +508,26 @@ API说明：
 - FileInputStream：字节文件输入流
 - FileReader：字符文件输入流
 - FileWriter：字符文件输出流
+
+3、读写SD卡
+
+（1）环境变量访问类：Environment
+
+- 获取当前存储设备状态：getExternalState
+
+- 获取SD卡的根目录：getExternalStorageDirectory
+
+（2）设置读写SD卡权限：
+
+判断是否具有对SD卡进行读写的权限：Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)
+
+Manifest配置：
+见文件操作综合案例
+
+#### 第3节  轻量级存储SharedPreferences
+
+
+### 第4节  访问远程数据库
 
 
 ### 第9章  地图服务与传感器检测技术
