@@ -524,10 +524,31 @@ API说明：
 Manifest配置：
 见文件操作综合案例
 
+ps：[如何访问手机内部存储？](https://blog.csdn.net/msn465780/article/details/78538225)
+
 #### 第3节  轻量级存储SharedPreferences
 
+Android系统提供了一个存储少量数据的轻量级数据存储方式SharedPreferences，该存储方式类似于Web程序中的Cookie，通常用它来保存一些配置文件数据、用户名、密码等。
 
-### 第4节  访问远程数据库
+SharedPreferences采用key-value的形式来组织和管理数据，其数据存储在XML格式的文件中。
+
+SharedPreferences接口常用的方法有：
+
+|方法|说明|
+|----|----|
+|edit|建立一个SharedPreferences.Editor对象|
+|contains|是否包含键值|
+|getAll|返回所有配置信息|
+|getBoolean|获得一个boolean数据|
+|getFloat|获得一个float数据|
+|getInt|获得一个int数据|
+|getLong|获得一个long数据|
+|getString|获得一个string数据|
+
+
+
+
+#### 第4节  访问远程数据库
 
 
 ### 第9章  地图服务与传感器检测技术
