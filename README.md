@@ -478,6 +478,39 @@ Callable接口和Runnable接口的区别在于：
 
 见样例
 
+### 第7章  应用Volley框架访问Web服务器
+
+#### 第1节  Volley框架及其应用
+
+Android开发团队意识到有必要对Http通信操作进行简化，于是在2013年推出了一个新的网络框架——Volley，Volley既可以进行HTTP通信，也可以加载图片等。它的设计目标就是非常适合进行数据量不大但通信频繁的网络操作。
+
+添加`compile group: 'com.mcxiaoke.volley', name: 'library', version: '1.0.19'`至Gradle即可
+
+Volley在处理数据的接收和发送时使用的是JSON格式，JSON是一种轻量级的数据交换格式，成为网络传输中理想的数据交换语言。
+
+Volley的基本工作原理：
+
+首先由主线程（应用程序）发起一条HTTP请求，将请求添加到缓存队列中，然后由缓存调度队列中取出一个请求，在缓存中解析并作出相应，最后将解析后的相应发送给主线程。在Volley内部创建两个线程，一个为缓存调度线程，一个为网络调度线程，优先在缓存中解析并响应请求，如果缓存不能被解析，则由网络线程使用HTTP发送请求给远程Web服务器解析。这里面涉及到几个重要对象：RequesrQueue（用来执行请求的请求队列）、Request（用来构造一个请求对象）。Request对象有以下几种类型：
+
+- StringRequest：响应的主体为字符串
+- JsonArrayRequest：发送和接收Json数组
+- JsonObjectRequest：发送和接收JSON对象
+- ImageRequest：发送和接收Image图像对象
+
+Volley使用方法：
+
+（1）创建一个RequestQueue对象
+
+（2）为了发出一条HTTP请求，还需要创建一个StringRequest对象，这个对象构造函数的参数包括：目的服务器的URL，服务器响应成功的回调函数和服务器响应失败的回调函数
+
+（3）将这个StringRequest对象添加到RequestQueue里面
+
+（4）记得添加网络权限
+
+#### 第2节  应用Volley框架设计网络音乐播放器
+
+见我的主页仓库项目
+
 ### 第8章  数据存储技术
 
 #### 第1节  SQLite本地数据库
