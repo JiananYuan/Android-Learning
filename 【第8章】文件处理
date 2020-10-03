@@ -1,0 +1,109 @@
+package com.example.learning;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText txt;
+    private Button btn1, btn2, btn3, btn4;
+    private String str;
+
+    void init() {
+        txt = findViewById(R.id.txt);
+        btn1 = findViewById(R.id.btn1);
+        btn2 = findViewById(R.id.btn2);
+        btn3 = findViewById(R.id.btn3);
+        btn4 = findViewById(R.id.btn4);
+        btn1.setOnClickListener(new mClick());
+        btn2.setOnClickListener(new mClick());
+        btn3.setOnClickListener(new mClick());
+        btn4.setOnClickListener(new mClick());
+    }
+
+    class mClick implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            str = txt.getText().toString();
+            if (str != "") {
+                if (view == btn1) {
+                    saveFile();
+                }
+                if (view == btn2) {
+                    saveSD();
+                }
+                if (view == btn3) {
+                    readFile();
+                }
+                if (view == btn4) {
+                    readSD();
+                }
+            }
+        }
+    }
+
+    void saveFile() {
+        try {
+            FileOutputStream out = openFileOutput("test.txt", Context.MODE_PRIVATE);
+            out.write(str.getBytes());
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void readFile() {
+        try {
+            FileInputStream in = openFileInput("test.txt");
+            byte[] b = new byte[1024];
+            int len = in.read(b);
+            txt.setText(new String(b, 0, len));
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void saveSD() {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            File path = new File(Environment.getExternalStorageDirectory(), "test.txt");
+            try {
+                FileOutputStream out = new FileOutputStream(path);
+                out.write(str.getBytes());
+                out.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    void readSD() {
+        File path = new File(Environment.getExternalStorageDirectory(), "test.txt");
+        try {
+            FileInputStream in = new FileInputStream(path);
+            byte[] b = new byte[1024];
+            int len = in.read(b);
+            txt.setText(new String(b, 0, len));
+            path.delete();
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        init();
+    }
+}
