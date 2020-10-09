@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="100dp">
+
+        <Button
+            android:id="@+id/btn1"
+            android:text="旋转"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn2"
+            android:text="缩放"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn3"
+            android:text="淡入淡出"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn4"
+            android:text="移动"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img"
+        android:src="@drawable/img"
+        android:layout_width="300dp"
+        android:layout_height="300dp" />
+
+</LinearLayout>
+
+
+========================================================================
+
+
+public class MainActivity extends AppCompatActivity {
+
+    private Button btn1, btn2, btn3, btn4;
+    private ImageView img;
+
+    void init() {
+        btn1 = findViewById(R.id.btn1);
+        btn2 = findViewById(R.id.btn2);
+        btn3 = findViewById(R.id.btn3);
+        btn4 = findViewById(R.id.btn4);
+        img  = findViewById(R.id.img);
+        btn1.setOnClickListener(new mClick());
+        btn2.setOnClickListener(new mClick());
+        btn3.setOnClickListener(new mClick());
+        btn4.setOnClickListener(new mClick());
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        init();
+
+    }
+
+    class mClick implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            AnimationSet set = new AnimationSet(true);
+            if (view == btn1) {
+                RotateAnimation rotate = new RotateAnimation(0, 3600, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                rotate.setDuration(8000);
+                set.addAnimation(rotate);
+            }
+            if (view == btn2) {
+                ScaleAnimation scale = new ScaleAnimation(0, 1f, 0, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                scale.setDuration(1000);
+                set.addAnimation(scale);
+            }
+            if (view == btn3) {
+                AlphaAnimation alpha = new AlphaAnimation(1, 0);
+                alpha.setDuration(1500);
+                set.addAnimation(alpha);
+            }
+            if (view == btn4) {
+                TranslateAnimation trans = new TranslateAnimation(
+                        Animation.RELATIVE_TO_SELF, 0f,
+                        Animation.RELATIVE_TO_SELF, 0.5f,
+                        Animation.RELATIVE_TO_SELF, 0f,
+                        Animation.RELATIVE_TO_SELF, 0.5f
+                        );
+                trans.setDuration(1000);
+                set.addAnimation(trans);
+            }
+            img.startAnimation(set);
+        }
+    }
+
+
+}
