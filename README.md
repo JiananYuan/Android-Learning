@@ -385,6 +385,15 @@ Animations是一个实现Android UI界面动画效果的API，Animations提供�
 - Translate：移动效果
 
 
+**2、属性动画**
+
+属性动画就是通过控制对象中的属性值而产生的动画。
+
+- ValueAnimation类：属性动画的运行机制是通过不断对值进行操作来实现的，而初始值和结束值之间的动画过渡就是ValueAnimation类来负责计算的。此类自动帮助用户完成从初始值到结束值之间平滑地过渡。
+
+- ObjectAnimation类：见样例
+
+
 
 
 ### 第5章  后台服务与系统服务
