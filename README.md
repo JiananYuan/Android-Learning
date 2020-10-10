@@ -304,6 +304,77 @@ dialog.show();
 
 #### 第2节  触摸屏事件处理
 
+见示例代码
+
+#### 第3、4节  多媒体播放技术（音频和视频）
+
+**1、android.media中的主要类：**
+
+|类名|说明|
+|----|----|
+|MediaPlayer|支持流媒体，用于播放音频和视频|
+|MediaRecorder|用于录制音频和视频|
+|AudioManager|控制音量|
+|AudioRecord|用于记录从音频输入设备产生的数据|
+|SoundPool|用于管理和播放应用程序的音频资源|
+
+**2、重点：多媒体处理播放器MediaPlayer：**
+
+|方法|说明|
+|----|----|
+|create|创建|
+|getCurrentPosition|获得当前的播放位置|
+|Pause|暂停|
+|Prepare|准备播放文件，同步|
+|PrepareAsync|准备播放文件，异步|
+|release|释放对象|
+|reset|重置对象|
+|seekTo|指定文件的播放位置|
+|setDataSource|设置多媒体数据来源|
+|setOnCompletionListener|监听文件播放完毕|
+|start|开始播放|
+|stop|结束播放|
+
+生命周期图：
+
+[MediaPlayer的生命周期](https://img-my.csdn.net/uploads/201005/26/521376_1274912556IBBI.gif)
+
+使用的一般流程：
+
+1、构建MediaPlayer对象，此处注意：
+
+- 播放SD卡上的音乐文件需要使用new方式创建对象
+- R.raw中的音乐文件需要使用create方法创建对象，这里create已经隐含了初始化及同步的方法
+
+2、设置播放文件（SD、Network上文件）：setDataSource
+
+3、同步
+
+4、播放
+
+5、释放
+
+**3、视频播放：**
+
+Android中的视频播放一共有两种方式：应用媒体播放器组件MediaPlayer和应用视频视图组件VideoView
+
+- MediaPlayer：与播放音频的不同，播放视频的承载体必须是实现了表面视图处理接口（surfaceHolder）的视图组件，即需要使用SurfaceView组件来显示播放的视频图像
+
+- VideoView：经常用来播放视频文件，见样例。其常见方法：
+
+|方法|说明|
+|----|----|
+|getBufferPercentage|获得缓冲区的百分比|
+|getCurrentPosition|获得当前位置|
+|onTouchEvent|处理触屏时间|
+|setMediaController|设置媒体控制器|
+|setVideoPath|设置视频文件的路径名|
+|setVideoURI|设置视频文件的URI|
+|start|播放|
+|stop|结束|
+
+
+
 
 
 #### 第5节  录音与拍照
