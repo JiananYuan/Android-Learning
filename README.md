@@ -337,7 +337,7 @@ dialog.show();
 
 生命周期图：
 
-![MediaPlayer的生命周期](https://img-my.csdn.net/uploads/201005/26/521376_1274912556IBBI.gif)
+![06KUfS.gif](https://s1.ax1x.com/2020/10/10/06KUfS.gif)
 
 使用的一般流程：
 
