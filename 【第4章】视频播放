@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:gravity="center">
+
+    <VideoView
+        android:id="@+id/video"
+        android:layout_width="match_parent"
+        android:layout_height="240dp" />
+
+</LinearLayout>
+
+
+
+================================================================================
+
+
+
+package com.example.myamap;
+
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.MediaController;
+import android.widget.VideoView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private VideoView video;
+    private MediaController controller;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        video = new VideoView(this);
+        video = findViewById(R.id.video);
+        controller = new MediaController(this);
+
+        video.setVideoURI(Uri.parse("你的视频地址"));
+        controller.setMediaPlayer(video);
+        video.setMediaController(controller);
+        video.start();
+    }
+
+}
